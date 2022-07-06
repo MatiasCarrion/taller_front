@@ -1,0 +1,31 @@
+.container-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    margin: 0 !important;
+}
+
+.button {
+    height: 100px;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.button:hover {
+    -webkit-transform:scale(1.1);transform:scale(1.1);
+    overflow:hidden;
+}
+
+
+.text-button {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.text-button:hover {
+    font-size: 20px;
+}
