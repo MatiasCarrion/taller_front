@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { CarComponent } from './components/car/car.component';
+import { CarService } from './services/car/car.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { CarComponent } from './components/car/car.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule
-  ],
-  providers: [],
+    ],
+  providers: [CarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
