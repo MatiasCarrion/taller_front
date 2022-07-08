@@ -9,3 +9,12 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.btn-nuevo {
+    font-weight: 700;
+}
+
+.btn-nuevo:hover {
+    -webkit-transform:scale(1.1);transform:scale(1.1);
+    overflow:hidden;
+}

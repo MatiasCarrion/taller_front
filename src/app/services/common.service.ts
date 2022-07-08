@@ -13,4 +13,8 @@ export class CommonService {
     return this.http.get(environment.baseURL + path);
   }
 
+  getOne(path: string, id: Number) {
+    return this.http.get(environment.baseURL + path + "/" + id);
+  }
+
 }

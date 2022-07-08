@@ -1,0 +1,35 @@
+<h2 class="title">Listado de Autos</h2>
+
+<div class="row">
+  <div class="col col-2 offset-9">
+    <button class="btn btn-outline-success btn-nuevo">
+      Nuevo Auto
+    </button>
+  </div>
+</div>
+
+<table class="table table-hover" *ngIf="!loading">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">ID</th>
+        <th scope="col" class="text-center">Patente</th>
+        <th scope="col" class="text-center">Marca</th>
+        <th scope="col" class="text-center">Modelo</th>
+        <th scope="col" class="text-center">Propietario</th>
+        <th scope="col" class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of list_cars">
+        <th scope="row" class="text-center">{{car.id}}</th>
+        <td class="text-center">{{car.patente}}</td>
+        <td  class="text-center">{{car.marca.nombre}}</td>
+        <td  class="text-center">{{car.modelo.nombre}}</td>
+        <td  class="text-center">{{car.propietario.nombre}} {{car.propietario.apellido}}</td>
+        <td  class="text-center">
+          <button class="btn btn-outline-secondary me-3" (click)="redirigir('autos/modificar/'+car.id)">Modificar</button>
+          <button class="btn btn-outline-primary">Nuevo Servicio</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

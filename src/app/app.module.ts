@@ -11,6 +11,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { CarComponent } from './components/car/car.component';
 import { CarService } from './services/car/car.service';
+import { CarUpdateComponent } from './components/car/car-update/car-update.component';
+import { CarListComponent } from './components/car/car-list/car-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { CarService } from './services/car/car.service';
     ErrorComponent,
     NavbarComponent,
     FooterComponent,
-    CarComponent
+    CarComponent,
+    CarUpdateComponent,
+    CarListComponent
   ],
   imports: [
     BrowserModule,

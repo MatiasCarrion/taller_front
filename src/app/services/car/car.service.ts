@@ -13,4 +13,8 @@ export class CarService {
   getCars() {
     return this._commonService.getAll("cars")
   }
+
+  getOneCar(id: Number) {
+    return this._commonService.getOne("cars", id);
+  }
 }
