@@ -1,5 +1,7 @@
 <h2 class="title">Listado de Autos</h2>
 
+<b *ngIf="(loading$ | async)" >loading... {{loading$ | async | json}}</b>
+
 <div class="row">
   <div class="col col-2 offset-9">
     <button class="btn btn-outline-success btn-nuevo" (click)="redirigir('autos/nuevo')">
@@ -8,7 +10,7 @@
   </div>
 </div>
 
-<table class="table table-hover" *ngIf="!loading">
+<table class="table table-hover" *ngIf="!(loading$ | async)" >
     <thead>
       <tr>
         <th scope="col" class="text-center">ID</th>
@@ -20,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let car of list_cars">
+      <tr *ngFor="let car of list_cars$ | async">
         <th scope="row" class="text-center">{{car.id}}</th>
         <td class="text-center">{{car.patente}}</td>
         <td  class="text-center">{{car.marca.nombre}}</td>

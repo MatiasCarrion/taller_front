@@ -1,4 +1,4 @@
-export interface Services {
+export interface ServicesModel {
         id: number,
         nombre: string,
         descripcion: string,

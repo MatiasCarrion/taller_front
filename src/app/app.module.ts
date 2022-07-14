@@ -16,6 +16,9 @@ import { CarListComponent } from './components/car/car-list/car-list.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { ROOT_REDUCER } from './state/app.state';
+import { EffectsModule } from '@ngrx/effects';
+import { CarEffects } from './state/effects/car.effects';
 
 @NgModule({
   declarations: [
@@ -33,8 +36,9 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreModule.forRoot(ROOT_REDUCER),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([CarEffects])
     ],
   providers: [CarService],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-export interface DetailTransaction {
+export interface DetailTransactionModel {
     id: number,
     cantidad: number,
     costo_unitario: number,
