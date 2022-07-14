@@ -1,1 +1,28 @@
-<p>car-update works!</p>
+<div *ngIf="!id">
+    <h2 class="title">Nuevo Auto</h2>
+
+    <div class="col-8 offset-2">
+        <div class="mb-3">
+            <label for="formpatente" class="form-label">Patente</label>
+            <input type="text" class="form-control" id="formpatente" placeholder="ingrese su patente...">
+          </div>
+          <div class="mb-3">
+            <label for="formmarca" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="formmarca" placeholder="ingrese su patente...">
+          </div>
+          <div class="mb-3">
+            <label for="formmodelo" class="form-label">Modelo</label>
+            <input type="text" class="form-control" id="formmodelo" placeholder="ingrese su patente...">
+          </div>
+          <div class="mb-3">
+            <label for="formpropietario" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="formpropietario" placeholder="ingrese su patente...">
+          </div>
+    </div>
+    
+</div>
+
+
+<div *ngIf="id">
+    <h2 class="title"> Modificar Auto</h2>
+</div>

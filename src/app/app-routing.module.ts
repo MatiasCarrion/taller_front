@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'autos', component: CarComponent,
     children: [
       { path: '', component: CarListComponent },
-      { path: 'modificar/:id', component: CarUpdateComponent}
+      { path: 'modificar/:id', component: CarUpdateComponent},
+      { path: 'nuevo', component: CarUpdateComponent}
     ]},
   { path:'**', component: ErrorComponent },
 ];

@@ -9,12 +9,14 @@ import { CarService } from 'src/app/services/car/car.service';
 })
 export class CarUpdateComponent implements OnInit {
 
+  id: any;
+
   constructor(private rutaActiva: ActivatedRoute,
               private _carService: CarService) { }
 
   ngOnInit(): void {
-    const id = this.rutaActiva.snapshot.params['id'];
-    this.getOneCar(id);
+    this.id = this.rutaActiva.snapshot.params['id'];
+    this.id ? this.getOneCar(this.id) : null;
   }
 
 
