@@ -6,12 +6,10 @@ import { CommonService } from '../common.service';
 })
 export class CarService {
 
-  
-
   constructor(private _commonService: CommonService) { }
 
   getCars() {
-    return this._commonService.getAll("cars")
+    return this._commonService.getAll("cars");
   }
 
   getOneCar(id: Number) {

@@ -13,6 +13,9 @@ import { CarComponent } from './components/car/car.component';
 import { CarService } from './services/car/car.service';
 import { CarUpdateComponent } from './components/car/car-update/car-update.component';
 import { CarListComponent } from './components/car/car-list/car-list.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { CarListComponent } from './components/car/car-list/car-list.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
     ],
   providers: [CarService],
   bootstrap: [AppComponent]

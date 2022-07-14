@@ -25,6 +25,7 @@ export class CarListComponent implements OnInit {
       this._carService.getCars().subscribe(
         res => {
           this.list_cars = res;
+          console.log(res);
           this.loading = false;
         },
         err => {
