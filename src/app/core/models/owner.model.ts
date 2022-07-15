@@ -1,7 +1,7 @@
 export interface OwnerModel {
     id: number,
     nombre: string,
-    apellid: string,
+    apellido: string,
     createdAt: Date,
     updatedAt: Date
 }

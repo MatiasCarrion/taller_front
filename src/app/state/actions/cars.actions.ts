@@ -9,3 +9,12 @@ export const loadedCars = createAction(
     '[Cars List] Loaded Success',
     props<{ cars: CarModel[] }>()
 );
+
+export const addingCar = createAction(
+  '[Cars List] Add Car in progress',
+);
+
+export const addedCar = createAction(
+  '[Cars List] Car Add Success',
+  props<{car: CarModel}>()
+);

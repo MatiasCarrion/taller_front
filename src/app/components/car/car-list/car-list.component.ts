@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
-import { loadCars } from 'src/app/state/actions/cars.actions';
+import { addingCar, loadCars } from 'src/app/state/actions/cars.actions';
 import { selectListCars, selectLoadingCars } from 'src/app/state/selectors/car.selectors';
 
 @Component({
@@ -23,6 +23,10 @@ export class CarListComponent implements OnInit {
     this.loading$ = this.store.select(selectLoadingCars);
     this.store.dispatch(loadCars());
     this.list_cars$ = this.store.select(selectListCars);
+  }
+
+  nuevo() {
+    this.store.dispatch(addingCar());
   }
 
   // getCars() {
