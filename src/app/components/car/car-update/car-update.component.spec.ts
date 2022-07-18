@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CarUpdateComponent } from './car-update.component';
+import { RouterTestingModule } from '@angular/router/testing'
+import { Store } from '@ngrx/store';
 
 describe('CarUpdateComponent', () => {
   let component: CarUpdateComponent;
@@ -8,7 +9,8 @@ describe('CarUpdateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CarUpdateComponent ]
+      declarations: [ CarUpdateComponent ],
+      imports: [ RouterTestingModule, Store ]
     })
     .compileComponents();
 
