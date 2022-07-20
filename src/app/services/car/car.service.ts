@@ -30,6 +30,10 @@ export class CarService {
     return this._commonService.getAll("owners");
   }
 
+  postCar(data: any) {
+    return this._commonService.postOne("cars", data);
+  }
+
 
   newFakeCar(): Observable<any> {
     const car: CarModel  = {

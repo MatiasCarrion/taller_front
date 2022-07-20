@@ -17,4 +17,8 @@ export class CommonService {
     return this.http.get(environment.baseURL + path + "/" + id);
   }
 
+  postOne(path: string, body: any) {
+    return this.http.post(environment.baseURL + path, body);
+  }
+
 }
