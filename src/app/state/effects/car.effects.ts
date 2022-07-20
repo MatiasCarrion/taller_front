@@ -32,4 +32,34 @@ export class CarEffects {
     )
   );
 
+  loadBrands$ = createEffect(() => this.actions$.pipe(
+    ofType('[Brands List] Load Brands'),
+    mergeMap(() => this._carService.getBrands()
+      .pipe(
+        map(brands => ({ type: '[Brands List] Loaded Success', brands })),
+        catchError(() => EMPTY)
+      ))
+    )
+  );
+
+  loadModels$ = createEffect(() => this.actions$.pipe(
+    ofType('[Models List] Load Models'),
+    mergeMap(() => this._carService.getModels()
+      .pipe(
+        map(models => ({ type: '[Models List] Loaded Success', models })),
+        catchError(() => EMPTY)
+      ))
+    )
+  );
+
+  loadOwners$ = createEffect(() => this.actions$.pipe(
+    ofType('[Owners List] Load Owners'),
+    mergeMap(() => this._carService.getOwners()
+      .pipe(
+        map(owners => ({ type: '[Owners List] Loaded Success', owners })),
+        catchError(() => EMPTY)
+      ))
+    )
+  );
+
 }

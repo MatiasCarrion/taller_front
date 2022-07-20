@@ -29,23 +29,6 @@ export class CarListComponent implements OnInit {
     this.store.dispatch(addingCar());
   }
 
-  // getCars() {
-  //   try {
-  //     this._carService.getCars().subscribe(
-  //       res => {
-  //         this.list_cars = res;
-  //         console.log(res);
-  //       },
-  //       err => {
-  //         console.error(err)
-  //       }
-
-  //     )
-  //   } catch (error) {
-      
-  //   }
-  // }
-
   redirigir(path: string) {
     this.router.navigate([path])
   }

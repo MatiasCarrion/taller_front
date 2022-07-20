@@ -8,7 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarComponent } from './components/car/car.component';
 import { CarService } from './services/car/car.service';
 import { CarUpdateComponent } from './components/car/car-update/car-update.component';
@@ -19,6 +19,8 @@ import { environment } from '../environments/environment';
 import { ROOT_REDUCER } from './state/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { CarEffects } from './state/effects/car.effects';
+import { PatenteComponent } from './components/car/patente/patente.component';
+import { PatentePipe } from './pipes/patente.pipe';
 
 @NgModule({
   declarations: [
@@ -29,13 +31,16 @@ import { CarEffects } from './state/effects/car.effects';
     FooterComponent,
     CarComponent,
     CarUpdateComponent,
-    CarListComponent
+    CarListComponent,
+    PatenteComponent,
+    PatentePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(ROOT_REDUCER),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([CarEffects])

@@ -18,3 +18,18 @@ export const selectLoadingCars = createSelector(
   selectCarsFeature,
   (state: carState) => state.loading
 );
+
+export const selectListBrands = createSelector(
+  selectCarsFeature,
+  (state: carState) => state.brands
+);
+
+export const selectListModels = createSelector(
+  selectCarsFeature,
+  (state: carState) => state.models
+);
+
+export const selectListOwners = createSelector(
+  selectCarsFeature,
+  (state: carState) => state.owners
+);

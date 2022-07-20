@@ -18,6 +18,19 @@ export class CarService {
     return this._commonService.getOne("cars", id);
   }
 
+  getBrands() {
+    return this._commonService.getAll("car-brand");
+  }
+
+  getModels() {
+    return this._commonService.getAll("car-model");
+  }
+
+  getOwners() {
+    return this._commonService.getAll("owners");
+  }
+
+
   newFakeCar(): Observable<any> {
     const car: CarModel  = {
       "id": 144,

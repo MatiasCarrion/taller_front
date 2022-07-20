@@ -1,29 +1,61 @@
-<div *ngIf="!id">
-    <h2 class="title">Nuevo Auto</h2>
+<div *ngIf="!id && !(loading$ | async)">
+  <h2 class="title">Nuevo Auto</h2>
 
-    <div class="col-8 offset-2">
-        <div class="mb-3">
-            <label for="formpatente" class="form-label">Patente</label>
-            <input type="text" class="form-control" id="formpatente" placeholder="ingrese su patente...">
-          </div>
-          <div class="mb-3">
-            <label for="formmarca" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="formmarca" placeholder="ingrese su patente...">
-          </div>
-          <div class="mb-3">
-            <label for="formmodelo" class="form-label">Modelo</label>
-            <input type="text" class="form-control" id="formmodelo" placeholder="ingrese su patente...">
-          </div>
-          <div class="mb-3">
-            <label for="formpropietario" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="formpropietario" placeholder="ingrese su patente...">
-          </div>
-    </div>
-    
 </div>
 
 
-<div *ngIf="id">
-    <h2 class="title"> Modificar Auto</h2>
-    <b>{{car$ | async | json }}</b>
+<div *ngIf="id && !(loading$ | async)">
+  <h2 class="title"> Modificar Auto</h2>
+  <b>{{car$ | async | json }}</b>
+</div>
+
+<div class="col-8 offset-2">
+
+
+  <form [formGroup]="formCar">
+
+    <label for="formpatente" class="form-label">Patente</label>
+
+    <!-- patente -->
+    <div class="row">
+      <div class="col-9">
+        <input type="text" class="form-control" id="formpatente" formControlName="patente"
+          placeholder="ingrese su patente...">
+      </div>
+      <div class="col-3">
+        <app-patente [patente]="formCar.controls['patente'].value"></app-patente>
+      </div>
+    </div>
+
+    <!-- marca -->
+    <label for="formmarca" class="form-label">Marca</label>
+    <select type="text" class="form-select" id="formmarca" formControlName="marca">
+      <option selected="true">Seleccione...</option>
+      <option *ngFor="let brand of (list_brands$ | async)">{{brand.nombre}}</option>
+    </select>
+
+    <!-- modelo -->
+    <label for="formmodelo" class="form-label">Modelo</label>
+    <select type="text" class="form-control" id="formmodelo" formControlName="modelo">
+      <option selected="true">Seleccione...</option>
+      <option *ngFor="let model of (list_models$ | async)">{{model.nombre}}</option>
+    </select>
+
+    <!-- propietario -->
+    <label for="formpropietario" class="form-label">Propietario</label>
+    <select type="text" class="form-control" id="formpropietario" formControlName="propietario">
+      <option selected="true">Seleccione...</option>
+      <option *ngFor="let owner of (list_owners$ | async)">{{owner.nombre}}
+        {{owner.apellido}}</option>
+    </select>
+
+    <div class="row col-4 offset-4">
+
+      <button type="button" class="btn btn-outline-success mt-4" >Submit</button>
+    </div>
+
+
+  </form>
+  <p>Form Status: {{ formCar.status }}</p>
+
 </div>
