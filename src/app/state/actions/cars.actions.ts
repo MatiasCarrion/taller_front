@@ -15,11 +15,16 @@ export const loadedCars = createAction(
 
 export const addingCar = createAction(
   '[Cars List] Add Car in progress',
+  props<{car: CarModel}>()
 );
 
 export const addedCar = createAction(
   '[Cars List] Car Add Success',
-  props<{car: CarModel}>()
+);
+
+export const addCarFail = createAction(
+  '[Cars List] Car Add Failed',
+  props<{error: String}>
 );
 
 export const loadBrands = createAction(

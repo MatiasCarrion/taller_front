@@ -24,7 +24,7 @@
     <tbody>
       <tr *ngFor="let car of list_cars$ | async">
         <th scope="row" class="text-center">{{car.id}}</th>
-        <td class="text-center">{{car.patente}}</td>
+        <td class="text-center">{{car.patente | patente}}</td>
         <td  class="text-center">{{car.marca.nombre}}</td>
         <td  class="text-center">{{car.modelo.nombre}}</td>
         <td  class="text-center">{{car.propietario.nombre}} {{car.propietario.apellido}}</td>

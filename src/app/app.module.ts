@@ -21,6 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CarEffects } from './state/effects/car.effects';
 import { PatenteComponent } from './components/car/patente/patente.component';
 import { PatentePipe } from './pipes/patente.pipe';
+import { ExistePatentePipe } from './pipes/existe-patente.pipe';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,9 @@ import { PatentePipe } from './pipes/patente.pipe';
     CarUpdateComponent,
     CarListComponent,
     PatenteComponent,
-    PatentePipe
-  ],
+    PatentePipe,
+    ExistePatentePipe
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

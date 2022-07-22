@@ -25,10 +25,6 @@ export class CarListComponent implements OnInit {
     this.list_cars$ = this.store.select(selectListCars);
   }
 
-  nuevo() {
-    this.store.dispatch(addingCar());
-  }
-
   redirigir(path: string) {
     this.router.navigate([path])
   }

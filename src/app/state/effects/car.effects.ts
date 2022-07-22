@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
+import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 import { CarService } from '../../services/car/car.service'
+import { addingCar } from '../actions/cars.actions';
 
 @Injectable()
 export class CarEffects {
-    
-    constructor(
-      private actions$: Actions,
-      private _carService: CarService,
-    ) {}
+
+  constructor(
+    private actions$: Actions,
+    private _carService: CarService,
+  ) { }
 
   loadCars$ = createEffect(() => this.actions$.pipe(
     ofType('[Cars List] Load Cars'),
@@ -19,17 +20,19 @@ export class CarEffects {
         map(cars => ({ type: '[Cars List] Loaded Success', cars })),
         catchError(() => EMPTY)
       ))
-    )
+  )
   );
 
   addingCar$ = createEffect(() => this.actions$.pipe(
     ofType('[Cars List] Add Car in progress'),
-    mergeMap(() => this._carService.newFakeCar()
+    tap(() => { console.log('encolando') }),
+    mergeMap((car) => this._carService.postCar(car)
       .pipe(
         map(car => ({ type: '[Cars List] Car Add Success', car })),
-        catchError(() => EMPTY)
+        // catchError(() => of({ type: '[Cars List] Car Add Failed' }))
+        catchError((error) => {throw new Error(error.message)} )
       ))
-    )
+  )
   );
 
   loadBrands$ = createEffect(() => this.actions$.pipe(
@@ -39,7 +42,7 @@ export class CarEffects {
         map(brands => ({ type: '[Brands List] Loaded Success', brands })),
         catchError(() => EMPTY)
       ))
-    )
+  )
   );
 
   loadModels$ = createEffect(() => this.actions$.pipe(
@@ -49,7 +52,7 @@ export class CarEffects {
         map(models => ({ type: '[Models List] Loaded Success', models })),
         catchError(() => EMPTY)
       ))
-    )
+  )
   );
 
   loadOwners$ = createEffect(() => this.actions$.pipe(
@@ -59,7 +62,7 @@ export class CarEffects {
         map(owners => ({ type: '[Owners List] Loaded Success', owners })),
         catchError(() => EMPTY)
       ))
-    )
+  )
   );
 
 }

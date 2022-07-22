@@ -20,18 +20,17 @@ export const carsReducer = createReducer(
       cars
     }
   }),
-  on(addingCar, (state) => {
+  on(addingCar, (state, { car }) => {
     return {
       ...state,
-      loading: true
-    }
-  }),
-  on(addedCar, (state, { car }) => {
-    return {
-      ...state,
-      loading: false,
+      loading: true,
       cars: [car, ...state.cars]
     }
+  }),
+  on(addedCar, (state) => {
+    return {
+      ...state,
+      loading: false    }
   }),
   on(loadBrands, (state) => {
     return {
