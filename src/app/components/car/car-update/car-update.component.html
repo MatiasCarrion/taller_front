@@ -33,7 +33,10 @@
     </div>
 
     <div class="alert-validator" *ngIf="formCar.controls['patente'].errors?.['required']">
-      Patente is required.
+      Patent is required.
+    </div>
+    <div class="alert-validator" *ngIf="(formCar.controls['patente'].value | existePatente : list_cars$)">
+      Patent already exists.
     </div>
 
     <!-- año -->
