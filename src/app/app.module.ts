@@ -20,8 +20,8 @@ import { ROOT_REDUCER } from './state/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { CarEffects } from './state/effects/car.effects';
 import { PatenteComponent } from './components/car/patente/patente.component';
-import { PatentePipe } from './pipes/patente.pipe';
-import { ExistePatentePipe } from './pipes/existe-patente.pipe';
+import { PatentePipe } from './pipes/patent/patente.pipe';
+import { FilterObservableListPipe } from './pipes/patent/filter-observable-list.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { ExistePatentePipe } from './pipes/existe-patente.pipe';
     CarListComponent,
     PatenteComponent,
     PatentePipe,
-    ExistePatentePipe
+    FilterObservableListPipe
     ],
   imports: [
     BrowserModule,
