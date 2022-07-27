@@ -31,7 +31,8 @@ export class CarEffects {
         map(car => ({ type: '[Cars List] Car Add Success', car })),
         // catchError(() => of({ type: '[Cars List] Car Add Failed' }))
         catchError((error) => {throw new Error(error.message)} )
-      ))
+      )
+    )
   )
   );
 

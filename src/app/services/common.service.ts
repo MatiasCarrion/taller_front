@@ -18,8 +18,8 @@ export class CommonService {
   }
 
   postOne(path: string, body: any) {
-    console.log('>>>> COMMON SERVICE')
-    console.log(body)
+    // console.log('>>>> COMMON SERVICE')
+    // console.log(body)
     return this.http.post(environment.baseURL + path, body);
   }
 

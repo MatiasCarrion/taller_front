@@ -31,8 +31,8 @@ export class CarService {
   }
 
   postCar(data: any) {
-    console.log('>>>> En servicio')
-    console.log(data)
+    // console.log('>>>> En servicio')
+    // console.log(data)
     return this._commonService.postOne("cars", data);
   }
 
