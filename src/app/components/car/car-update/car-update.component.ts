@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { BrandModel } from 'src/app/core/models/brand.model';
@@ -11,6 +11,7 @@ import { CarService } from 'src/app/services/car/car.service';
 import { addingCar, loadBrands, loadCars, loadModels, loadOwners } from 'src/app/state/actions/cars.actions';
 import { AppState } from 'src/app/state/app.state';
 import { selectListBrands, selectListCars, selectListModels, selectListOwners, selectOneCar } from 'src/app/state/selectors/car.selectors';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-car-update',
@@ -29,8 +30,9 @@ export class CarUpdateComponent implements OnInit {
   list_cars$: Observable<CarModel[]> = new Observable();
 
   constructor(private rutaActiva: ActivatedRoute,
-    private store: Store<AppState>,
-    private _carService: CarService) { }
+              private router: Router,
+              private store: Store<AppState>,
+              private _carService: CarService) { }
 
   ngOnInit(): void {
 
@@ -61,12 +63,23 @@ export class CarUpdateComponent implements OnInit {
   }
 
   saveCar() {
-    // this.store.dispatch(addingCar(this.formCar.value));
-
-    this._carService.postCar(this.formCar.value).subscribe(
-      res => console.log(res),
-      err => console.error(err)
-    );
+    this.store.dispatch(addingCar(this.formCar.value));
+    this.cleanForm();
+    Swal.fire({
+      icon: 'success',
+      title: 'Congratulations...',
+      text: 'Car added with success!',
+    })
+    .then(
+      () => this.router.navigate(['autos'])
+    )
+  }
+  cleanForm() {
+    this.formCar.controls['patente'].setValue('');
+    this.formCar.controls['año'].setValue(null);
+    this.formCar.controls['marca_id'].setValue(null);
+    this.formCar.controls['modelo_id'].setValue(null);
+    this.formCar.controls['propietario_id'].setValue(null);
   }
 
   validationPatent() {
