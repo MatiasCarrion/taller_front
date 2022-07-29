@@ -20,7 +20,6 @@
       <div class="col-8">
         <input type="text" class="form-control" id="formpatente" formControlName="patente"
           placeholder="ingrese su patente..." (ngModelChange)="validationPatent()">
-          <p>{{id > 0 ? true : false}}</p>
       </div>
       <div class="col-3">
         <app-patente [patente]="formCar.controls['patente'].value"></app-patente>
