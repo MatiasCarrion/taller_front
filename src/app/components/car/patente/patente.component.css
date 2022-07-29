@@ -1,0 +1,30 @@
+
+.borde-patente {
+    border: solid 2px black;
+}
+
+.patente {
+    background-color: white;
+    height: 2.5rem;
+    margin: 0px !important;
+
+}
+.header {
+    font-size: 0.6rem;
+    font-family: monospace;
+    background-color: rgb(71, 118, 245);
+}
+
+.titulo {
+    margin-bottom: 0px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.letras-patente {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+
+}

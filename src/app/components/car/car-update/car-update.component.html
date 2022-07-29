@@ -1,0 +1,90 @@
+<div *ngIf="!id && !(loading$ | async)">
+  <h2 class="title">Nuevo Auto</h2>
+
+</div>
+
+
+<div *ngIf="id && !(loading$ | async)">
+  <h2 class="title"> Modificar Auto</h2>
+</div>
+
+<div class="col-8 offset-2" *ngIf="!(loading$ | async)">
+
+
+  <form [formGroup]="formCar">
+
+    <label for="formpatente" class="form-label">Patente</label>
+
+    <!-- patente -->
+    <div class="row">
+      <div class="col-8">
+        <input type="text" class="form-control" id="formpatente" formControlName="patente"
+          placeholder="ingrese su patente..." (ngModelChange)="validationPatent()">
+      </div>
+      <div class="col-3">
+        <app-patente [patente]="formCar.controls['patente'].value"></app-patente>
+      </div>
+      <div class="col-1 img-pat">
+        <img *ngIf="!existsPatent()" class="icon"
+          src="https://www.thetrcompany.com/wp-content/uploads/2018/09/tilde.png">
+        <img *ngIf="existsPatent()" class="icon"
+          src="https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png">
+
+      </div>
+    </div>
+
+    <div class="alert-validator" *ngIf="formCar.controls['patente'].errors?.['required']">
+      Patent is required.
+    </div>
+    <div class="alert-validator" *ngIf="existsPatent()">
+      Patent already exists.
+    </div>
+
+    <!-- año -->
+    <label for="formaño" class="form-label mt-2">Año</label>
+    <input type="number" min="1950" class="form-control" id="formaño" formControlName="año"
+      placeholder="ingrese el año...">
+    <div class="alert-validator"
+      *ngIf="formCar.controls['año'].errors?.['min'] || formCar.controls['año'].errors?.['max']">
+      El año debe estar entre 1950 y el año actual...
+    </div>
+
+    <!-- marca -->
+    <label for="formmarca" class="form-label mt-4">Marca</label>
+    <select type="text" class="form-select" id="formmarca" formControlName="marca_id"> <!-- (ngModelChange)="filtrarListaModelos()" -->
+      <option selected="true">Seleccione...</option>
+      <option *ngFor="let brand of (list_brands$ | async)" [value]="brand.id">{{brand.nombre}}</option>
+    </select>
+
+    <!-- modelo -->
+    <div *ngIf="formCar.controls['marca_id'].value > 0">
+
+      <label for="formmodelo" class="form-label mt-4">Modelo</label>
+      <select type="text" class="form-control" id="formmodelo" formControlName="modelo_id">
+        <option selected="true">Seleccione...</option>
+        <option
+          *ngFor="let model of (list_models$ | filterObservableList : formCar.controls['marca_id'].value) "
+          [value]="model.id">{{model.nombre}}</option>
+      </select>
+    </div>
+
+    <!-- propietario -->
+    <label for="formpropietario" class="form-label mt-4">Propietario</label>
+    <select type="text" class="form-control" id="formpropietario" formControlName="propietario_id">
+      <option selected="true">Seleccione...</option>
+      <option *ngFor="let owner of (list_owners$ | async)" [value]="owner.id">{{owner.nombre}}
+        {{owner.apellido}}</option>
+    </select>
+
+    <div class="row col-4 offset-4">
+
+      <button *ngIf="!id" type="button" class="btn btn-outline-success mt-4" (click)="saveCar()"
+        [disabled]="formCar.invalid">Save</button>
+        <button *ngIf="id" type="button" class="btn btn-outline-success mt-4" (click)="updateCar()"
+        [disabled]="formCar.invalid">Update</button>
+    </div>
+
+
+  </form>
+
+</div>

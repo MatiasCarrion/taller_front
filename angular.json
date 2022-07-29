@@ -70,7 +70,8 @@
               "browserTarget": "taller-front:build:production"
             },
             "development": {
-              "browserTarget": "taller-front:build:development"
+              "browserTarget": "taller-front:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
