@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { carState } from 'src/app/core/states/car.state';
-import { addedCar, addingCar, loadBrands, loadCars, loadedBrands, loadedCars, loadedModels, loadedOwners, loadModels, loadOwners } from '../actions/cars.actions';
+import { addedCar, addingCar, loadBrands, loadCars, loadedBrands, loadedCars, loadedModels, loadedOwners, loadModels, loadOwners, updatedCar, updatingCar } from '../actions/cars.actions';
 
 
 export const initialState: carState = { loading: false, cars: [], brands: [], models: [], owners: [] };
@@ -30,7 +30,21 @@ export const carsReducer = createReducer(
   on(addedCar, (state) => {
     return {
       ...state,
-      loading: false    }
+      loading: false
+    }
+  }),
+  on(updatingCar, (state, { car }) => {
+    return {
+      ...state,
+      loading: true,
+      cars: [car, ...state.cars]
+    }
+  }),
+  on(updatedCar, (state) => {
+    return {
+      ...state,
+      loading: false
+    }
   }),
   on(loadBrands, (state) => {
     return {

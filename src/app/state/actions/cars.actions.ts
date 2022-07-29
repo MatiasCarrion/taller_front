@@ -27,6 +27,15 @@ export const addCarFail = createAction(
   props<{error: String}>
 );
 
+export const updatingCar = createAction(
+  '[Cars List] Updating Car in progress',
+  props<{car: CarModel, id: number}>()
+);
+
+export const updatedCar = createAction(
+  '[Cars List] Car Update Success',
+);
+
 export const loadBrands = createAction(
   '[Brands List] Load Brands',
 );

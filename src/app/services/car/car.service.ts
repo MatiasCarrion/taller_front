@@ -33,9 +33,13 @@ export class CarService {
   postCar(data: any) {
     // console.log('>>>> En servicio')
     // console.log(data)
-    return this._commonService.postOne("cars", data);
+    return this._commonService.postOne('cars', data);
   }
 
+  patchCar(data:any, id: any) {
+    console.log('id de servicio car ', id)
+    return this._commonService.patchOne(`cars/${id}`, data)
+  }
 
   newFakeCar(): Observable<any> {
     const car: CarModel  = {

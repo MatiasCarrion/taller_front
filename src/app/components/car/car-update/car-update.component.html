@@ -6,10 +6,9 @@
 
 <div *ngIf="id && !(loading$ | async)">
   <h2 class="title"> Modificar Auto</h2>
-  <b>{{car$ | async | json }}</b>
 </div>
 
-<div class="col-8 offset-2">
+<div class="col-8 offset-2" *ngIf="!(loading$ | async)">
 
 
   <form [formGroup]="formCar">
@@ -21,6 +20,7 @@
       <div class="col-8">
         <input type="text" class="form-control" id="formpatente" formControlName="patente"
           placeholder="ingrese su patente..." (ngModelChange)="validationPatent()">
+          <p>{{id > 0 ? true : false}}</p>
       </div>
       <div class="col-3">
         <app-patente [patente]="formCar.controls['patente'].value"></app-patente>
@@ -79,8 +79,10 @@
 
     <div class="row col-4 offset-4">
 
-      <button type="button" class="btn btn-outline-success mt-4" (click)="saveCar()"
-        [disabled]="formCar.invalid">Submit</button>
+      <button *ngIf="!id" type="button" class="btn btn-outline-success mt-4" (click)="saveCar()"
+        [disabled]="formCar.invalid">Save</button>
+        <button *ngIf="id" type="button" class="btn btn-outline-success mt-4" (click)="updateCar()"
+        [disabled]="formCar.invalid">Update</button>
     </div>
 
 

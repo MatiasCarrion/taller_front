@@ -25,10 +25,21 @@ export class CarEffects {
 
   addingCar$ = createEffect(() => this.actions$.pipe(
     ofType('[Cars List] Add Car in progress'),
-    tap(() => { console.log('encolando') }),
     mergeMap((car) => this._carService.postCar(car)
       .pipe(
         map(car => ({ type: '[Cars List] Car Add Success', car })),
+        // catchError(() => of({ type: '[Cars List] Car Add Failed' }))
+        catchError((error) => {throw new Error(error.message)} )
+      )
+    )
+  )
+  );
+
+  updatingCar$ = createEffect(() => this.actions$.pipe(
+    ofType('[Cars List] Updating Car in progress'),
+    mergeMap((car, id) => this._carService.patchCar(car, 1)
+      .pipe(
+        map(car => ({ type: '[Cars List] Car Update Success', car })),
         // catchError(() => of({ type: '[Cars List] Car Add Failed' }))
         catchError((error) => {throw new Error(error.message)} )
       )

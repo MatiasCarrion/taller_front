@@ -23,4 +23,8 @@ export class CommonService {
     return this.http.post(environment.baseURL + path, body);
   }
 
+  patchOne(path: string, body: any) {
+    return this.http.patch(environment.baseURL + path, body.car)
+  }
+
 }

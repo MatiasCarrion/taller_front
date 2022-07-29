@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable, pipe } from 'rxjs';
 import { BrandModel } from 'src/app/core/models/brand.model';
 import { CarModel } from 'src/app/core/models/car.model';
 import { ModelModel } from 'src/app/core/models/model.model';
 import { OwnerModel } from 'src/app/core/models/owner.model';
-import { CarService } from 'src/app/services/car/car.service';
-import { addingCar, loadBrands, loadCars, loadModels, loadOwners } from 'src/app/state/actions/cars.actions';
+import { addingCar, loadBrands, loadCars, loadModels, loadOwners, updatingCar } from 'src/app/state/actions/cars.actions';
 import { AppState } from 'src/app/state/app.state';
 import { selectListBrands, selectListCars, selectListModels, selectListOwners, selectOneCar } from 'src/app/state/selectors/car.selectors';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
   selector: 'app-car-update',
@@ -31,8 +30,7 @@ export class CarUpdateComponent implements OnInit {
 
   constructor(private rutaActiva: ActivatedRoute,
               private router: Router,
-              private store: Store<AppState>,
-              private _carService: CarService) { }
+              private store: Store<AppState>) { }
 
   ngOnInit(): void {
 
@@ -45,14 +43,6 @@ export class CarUpdateComponent implements OnInit {
     this.list_owners$ = this.store.select(selectListOwners);
     this.list_cars$ = this.store.select(selectListCars);
 
-    this.id = this.rutaActiva.snapshot.params['id'];
-    if (this.id) {
-      this.car$ = this.store.select(selectOneCar, this.id)
-    }
-    else {
-      null
-    };
-
     this.formCar = new FormGroup({
       patente: new FormControl('', (Validators.pattern('([a-zA-Z]{2}[\\d]{3}[a-zA-Z]{2})|([a-zA-Z]{3}[\\d]{3})'), Validators.required)), // valida cadenas AA123AA ó OAM123
       año: new FormControl('', (Validators.min(1950), Validators.max(new Date().getFullYear()))),
@@ -60,20 +50,56 @@ export class CarUpdateComponent implements OnInit {
       modelo_id: new FormControl('', Validators.required),
       propietario_id: new FormControl('', Validators.required)
     })
+
+    this.id = this.rutaActiva.snapshot.params['id'];
+
+    if (this.id) {
+      this.car$ = this.store.select(selectOneCar, this.id);
+      this.car$.subscribe(
+        car => {
+          this.formCar.controls['patente'].setValue(car.patente);
+          this.formCar.controls['año'].setValue(car.año);
+          this.formCar.controls['marca_id'].setValue(car.marca_id);
+          this.formCar.controls['modelo_id'].setValue(car.modelo_id);
+          this.formCar.controls['propietario_id'].setValue(car.propietario_id);
+        }
+      )
+      this.formCar.controls['patente'].disable();
+      this.formCar.controls['año'].disable();
+      this.formCar.controls['marca_id'].disable();
+      this.formCar.controls['modelo_id'].disable();
+    }
+    else {
+      null
+    };
+
+  }
+
+  updateCar() {
+    console.log(this.formCar.value, this.id)
+    this.store.dispatch(updatingCar({car: this.formCar.value, id: this.id}));
+    this.cleanForm();
+    this.showMessage('success','Congratulations...','Car updated with success!','autos')
+
   }
 
   saveCar() {
     this.store.dispatch(addingCar(this.formCar.value));
     this.cleanForm();
+    this.showMessage('success','Congratulations...','Car added with success!','autos')
+  }
+
+  showMessage(icon: SweetAlertIcon, title: string, text: string, path: string) {
     Swal.fire({
-      icon: 'success',
-      title: 'Congratulations...',
-      text: 'Car added with success!',
+      icon: icon,
+      title: title,
+      text: text,
     })
     .then(
-      () => this.router.navigate(['autos'])
+      () => this.router.navigate([path])
     )
   }
+
   cleanForm() {
     this.formCar.controls['patente'].setValue('');
     this.formCar.controls['año'].setValue(null);
